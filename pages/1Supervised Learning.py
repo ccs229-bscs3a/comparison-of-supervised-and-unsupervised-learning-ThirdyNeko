@@ -53,7 +53,7 @@ def app():
         for label, color in zip(unique_labels, colors):
             indices = y_pred == label
             # Use ax.scatter for consistent plotting on the created axis
-            ax.scatter(X[indices, 0], X[indices, 1], label=iris.target_names[label], c=color)
+            ax.scatter(X[indices, 0], X[indices, 1], label=wine.target_names[label], c=color)
 
         # Add labels and title using ax methods
         ax.set_xlabel('Alcohol Content')
