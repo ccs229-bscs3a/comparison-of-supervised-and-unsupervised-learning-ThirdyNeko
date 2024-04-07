@@ -14,35 +14,14 @@ import time
 # Define the Streamlit app
 def app():
 
-    st.subheader('K-means clustering applied to the Iris Dataset')
-    text = """This is a classic example of unsupervised learning task. The Iris dataset contains 
-    information about Iris flowers (sepal length, sepal width, petal length, petal width) but 
-    doesn't have labels indicating the flower species (Iris Setosa, Iris Versicolor, 
-    Iris Virginica). K-means doesn't use these labels during clustering.
-    \n* **K-means Clustering:** The algorithm aims to group data points into a predefined 
-    number of clusters (k). It iteratively assigns each data point to the nearest cluster 
-    centroid (center) and recomputes the centroids based on the assigned points. This process 
-    minimizes the within-cluster distances, creating groups with similar characteristics.
-    In essence, K-means helps uncover inherent groupings within the Iris data based on their 
-    features (measurements) without relying on predefined categories (flower species). 
-    This allows us to explore how well the data separates into natural clusters, potentially 
-    corresponding to the actual flower species.
-    \n* Choosing the optimal number of clusters (k) is crucial. The "elbow method" 
-    helps visualize the trade-off between increasing clusters and decreasing improvement 
-    in within-cluster distances.
-    * K-means is sensitive to initial centroid placement. Running the algorithm multiple times 
-    with different initializations can help identify more stable clusters.
-    By applying K-means to the Iris dataset, we gain insights into the data's underlying structure 
-    and potentially validate the separability of the known flower species based on their 
-    measured characteristics."""
-    st.write(text)
+    st.subheader('K-means clustering applied to the Wine Dataset')
 
 
     if st.button("Begin"):
         # Load the Iris dataset
-        iris = datasets.load_iris()
-        X = iris.data  # Features
-        y = iris.target  # Target labels (species)
+        wine = datasets.load_wine()
+        X = wine.data  # Features
+        y = wine.target  # Target labels (species)
 
         # Define the K-means model with 3 clusters (known number of species)
         kmeans = KMeans(n_clusters=3, random_state=0, n_init=10)
@@ -75,9 +54,7 @@ def app():
         * Negative values indicate poorly separated clusters (data points in a cluster are closer to points in other clusters).
         In this case, a Silhouette Score of 0.5528 suggests:
         * **Moderately separated clusters:** The data points within a cluster are somewhat closer to their centroid than to centroids of other clusters. There's some separation, but it's not perfect
-        * **Potential for improvement:** You might consider exploring different numbers of clusters (k) or using different initialization methods for K-means to see if a better clustering solution can be achieved with a higher Silhouette Score (closer to 1).
-        * The Iris dataset is relatively well-separated into three flower species. A Silhouette Score above 0.5 might be achievable with an appropriate number of clusters (k=3) and good initialization.
-        * The optimal k can vary depending on the specific dataset and the desired level of granularity in the clustering."""
+        * **Potential for improvement:** You might consider exploring different numbers of clusters (k) or using different initialization methods for K-means to see if a better clustering solution can be achieved with a higher Silhouette Score (closer to 1)."""
         with st.expander("Click here for more information."):\
             st.write(text)
             
@@ -93,12 +70,12 @@ def app():
         for label, color in zip(unique_labels, colors):
             indices = y_pred == label
             # Use ax.scatter for consistent plotting on the created axis
-            ax.scatter(X[indices, 0], X[indices, 1], label=iris.target_names[label], c=color)
+            ax.scatter(X[indices, 0], X[indices, 1], label=wine.target_names[label], c=color)
 
         # Add labels and title using ax methods
-        ax.set_xlabel('Sepal length (cm)')
-        ax.set_ylabel('Sepal width (cm)')
-        ax.set_title('Sepal Length vs Width Colored by Predicted Iris Species')
+        ax.set_xlabel('Alcohol Content')
+        ax.set_ylabel('Color Intensity')
+        ax.set_title('Alcohol Content vs Colour Intensity by Predicted Wine Type')
 
         # Add legend and grid using ax methods
         ax.legend()
