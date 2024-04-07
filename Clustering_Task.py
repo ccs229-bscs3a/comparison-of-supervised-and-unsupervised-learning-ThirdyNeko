@@ -13,7 +13,7 @@ def app():
     West Visayas State University"""
     st.text(text)
 
-    st.image('iris_flower.jpg', caption="The Iris Dataset""")
+    st.image('pokemon.jpg', caption="The Pokemon Dataset""")
 
     text = """Data App: Supervised vs Unsupervised Learning Performance
     \nThis data app allows users to compare the performance of supervised learning (KNN) and unsupervised 
